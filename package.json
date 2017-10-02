@@ -1,0 +1,28 @@
+{
+  "name": "scheduler",
+  "version": "1.0.0",
+  "description": "Custom scheduling API",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "mongodb": "^2.2.31",
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mooretc2/Scheduler-API.git"
+  },
+  "author": "Tyler Moore <mooretc2@miamioh.edu>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mooretc2/Scheduler-API/issues"
+  },
+  "homepage": "https://github.com/mooretc2/Scheduler-API#readme"
+}
