@@ -16,7 +16,7 @@ module.exports = function(app, db) {
 		res.send('hw success');
 	});
 	app.get('/sethw/:time', (req, res) => {
-		getActivity();
+		clockOut();
 		res.send('set hw success ' + req.params.time);
 	});
 	app.get('/sleep', (req, res) => {
