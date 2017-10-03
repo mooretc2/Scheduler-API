@@ -1,13 +1,14 @@
 var util = require('util');
 var duration = require('duration');
 var hw, sleep, food, required;
-var remhw, remsleep, remfood;
+var remhw, remsleep, remfood, remfree;
 var totalhw, totalsleep, totalfood, totalrequired, totalfree;
 var lastClock, activity;
 
 module.exports = function(app, db) {
 	app.get('/free', (req, res) => {
-		res.send('Success');
+		clockOut();
+		res.end();
 	});
 	app.get('/remfree', (req, res) => {
 		res.send('remaining free success');
@@ -16,36 +17,42 @@ module.exports = function(app, db) {
 		res.send('hw success');
 	});
 	app.get('/sethw/:time', (req, res) => {
-		clockOut();
-		res.send('set hw success ' + req.params.time);
+		hw = req.params.time;
+		res.end();
 	});
 	app.get('/sleep', (req, res) => {
+		clockOut();
+		newDay();
 		res.send('sleep success');
 	});
+	app.get('/nap', (req, res) => {
+		clockOut();
+		res.end();
+	});
 	app.get('/food', (req, res) => {
-		res.send('food success');
+		clockOut();
+		res.end();
 	});
 	app.get('/setfood/:time', (req, res) => {
-		res.send('set food success ' + req.params.time);
+		food = req.params.time;
+		res.end();
 	});
 	app.get('/setrequired/:time', (req, res) => {
-		res.send('set required success ' + req.params.time);
+		required = req.params.time;
 	});
 };
 
 function clockOut(){
-	if(activity == 'sleep'){
+	if(activity == 'sleep')
 		totalSleep += getDiff();
-		if(Date.now().hour >= 22 || Date.now().hour <= 10){
-			newDay();
-		}
-	}
 	if(activity == 'food')
 		totalFood += getDiff();
 	if(activity == 'hw')
-		return hw;
+		totalhw += getDiff();
 	if(activity == 'required')
-		return required;
+		totalrequired += getDiff();
+	if(activity == 'free')
+		totalfree += getDiff();
 };
 
 function getDiff() {
