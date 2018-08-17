@@ -21,7 +21,7 @@ db.on('error', function(){
 })
 db.once('open', function(){
 	console.log("connected to database");
-	var new_user = new User({contents: "Hello World!"});
+	var new_user = new User({username: "username"});
 	new_user.save(function(err, user){
 		if(err) console.log("Error adding user");
 		console.log(user);
