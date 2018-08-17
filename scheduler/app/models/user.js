@@ -36,7 +36,10 @@ var UserSchema = new Schema({
 });
 */
 var UserSchema = new mongoose.Schema({
-	contents: String
+	username: {
+		type: String,
+		required: true
+	}
 });
 
 module.exports = mongoose.model('Users', UserSchema);
