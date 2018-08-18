@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
+const cfg = require('./config');
 
 const app = express();
 const http = require('http').Server(app);
@@ -8,25 +9,20 @@ const io = require('socket.io')(http);
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://scheduler-db:27017/scheduler-db', {
-	useNewUrlParser: true
+mongoose.connect(cfg.db.protocol+cfg.db.uri+cfg.db.database, {useNewUrlParser: true}, function(error){
+	console.log("DB connection error: " + error);
+	process.exit(1);
 });
 var UserSchema = require('./scheduler/app/models/user');
 var User = mongoose.model('Users');
 var db = mongoose.connection;
-db.on('error', function(){
-	console.log("Something went wrong");
-	console.error.bind(console, "connection error");
+db.on('error', function(error){
+	console.log("DB error: " + error);
 	process.exit(1);
-})
+});
 db.once('open', function(){
 	console.log("connected to database");
-	var new_user = new User({username: "username"});
-	new_user.save(function(err, user){
-		if(err) console.log("Error adding user");
-		console.log(user);
-	});
-})
+});
 
 const port = 4000;
 
