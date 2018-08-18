@@ -10,8 +10,10 @@ const io = require('socket.io')(http);
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect(cfg.db.protocol+cfg.db.uri+cfg.db.database, {useNewUrlParser: true}, function(error){
-	console.log("DB connection error: " + error);
-	process.exit(1);
+	if(error){
+		console.log("DB connection error: " + error);
+		process.exit(1);
+	}
 });
 var UserSchema = require('./scheduler/app/models/user');
 var User = mongoose.model('Users');
