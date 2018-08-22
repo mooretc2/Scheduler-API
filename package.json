@@ -6,19 +6,18 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.1",
-    "mongodb": "^2.2.31",
-    "socket.io": "^2.0.3"
+    "mongodb": "^2.2.31"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "duration": "^0.2.0",
     "mocha": "^5.2.0",
     "mongoose": "^5.2.8",
-    "monk": "^6.0.6",
     "nodemon": "^1.12.1"
   },
   "scripts": {
-    "dev": "nodemon server.js"
+    "start": "node server.js",
+    "test": "mocha ./scheduler/test/*.js"
   },
   "repository": {
     "type": "git",
