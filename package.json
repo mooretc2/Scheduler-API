@@ -13,11 +13,12 @@
     "duration": "^0.2.0",
     "mocha": "^5.2.0",
     "mongoose": "^5.2.8",
+    "node-mocks-http": "^1.7.0",
     "nodemon": "^1.12.1"
   },
   "scripts": {
     "start": "node server.js",
-    "test": "mocha ./scheduler/test/*.js"
+    "test": "mocha ./scheduler/test/userTest.js"
   },
   "repository": {
     "type": "git",

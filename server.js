@@ -9,7 +9,12 @@ const http = require('http').Server(app);
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect(cfg.db.protocol+cfg.db.uri+cfg.db.database, {useNewUrlParser: true}, function(error){
+var mongoOptions = {
+	useNewUrlParser: true,
+	retryMiliSeconds: 5000,
+    numberOfRetries: 10
+}
+mongoose.connect(cfg.db.protocol+cfg.db.uri+cfg.db.database, mongoOptions, function(error){
 	if(error){
 		console.log("DB connection error: " + error);
 		process.exit(1);

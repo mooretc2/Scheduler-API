@@ -1,5 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
+var Segment = require('./segment');
 
 //First pass at a viable db schema, will use after testing server
 /*
@@ -8,7 +9,7 @@ var UserSchema = new Schema({
 		type: String,
 		required: true
 	},
-	day: [{
+	days: [{
 		date: {
 			type: Date,
 			default: Date.now
@@ -24,10 +25,6 @@ var UserSchema = new Schema({
 		}]
 	}],
 	segments: [{
-		id: {
-			type: Number,
-			required: true
-		},
 		name: {
 			type: String,
 			required: true
@@ -39,7 +36,8 @@ var UserSchema = new mongoose.Schema({
 	username: {
 		type: String,
 		required: true
-	}
+	},
+	segments: [Segment]
 });
 
 module.exports = mongoose.model('Users', UserSchema);
